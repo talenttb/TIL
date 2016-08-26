@@ -12,9 +12,13 @@ a GO web framework
 
 只是不知道會不會中途而棄
 
+Iris version = 4.1.1
+
 ---
 ### **章節**
 
 [CLI](/cli.md)
 
-[Main](/main.md)
+[HI](/main.md)
+
+[Handlers](/handlers.md)
