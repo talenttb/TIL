@@ -115,6 +115,27 @@ func (u UserAPI) DeleteBy(id string) {
 iris.API("/users", UserAPI{})
 ```
 
+來看看這個API是怎麼自動做出來的
+
+在github.com\kataras\iris\iris.go
+```go
+
+func (api *muxAPI) API(path string, restAPI HandlerAPI, middleware ...HandlerFunc) {
+
+...
+
+// GET, DELETE -> with url named parameters (/users/:id/:secondArgumentIfExists)
+// POST, PUT -> with post values (form)
+
+methodWithBy := strings.Title(strings.ToLower(methodName)) + "By"
+if method, found := typ.MethodByName(methodWithBy); found {
+```
+
+他對所有的methodName(GET, POST, ...)都加上By，然後從我們傳進去的物件來找有沒有MethodName+"By"的名稱，然後再使用HandleFunc註冊進去，就有了自動化產生的效果了。
+
+但這種方法就如同作者所述，很慢，因為要處理的事情很多。
+
+
 接下來介紹一下要怎麼找所有的Routes path
 
 1. 查詢所有的路徑
