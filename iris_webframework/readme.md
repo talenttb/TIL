@@ -22,3 +22,5 @@ Iris version = 4.1.1
 [HI](/main.md)
 
 [Handlers](/handlers.md)
+
+[Middleware](/middleware.md)
