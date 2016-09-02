@@ -24,3 +24,5 @@ Iris version = 4.1.1
 [Handlers](/handlers.md)
 
 [Middleware](/middleware.md)
+
+[Static Files](/staticFiles.md)
