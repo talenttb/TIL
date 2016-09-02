@@ -1,4 +1,4 @@
-# [Middleware](http://iris-go.com/middleware/) && Party(http://iris-go.com/party/)
+# [Middleware](http://iris-go.com/middleware/) && Party(http://iris-go.com/party/) && [subdomains](http://iris-go.com/subdomains/)
 
 什麼是Middleware？
 
@@ -123,4 +123,6 @@ admin := api.Party("/admin", func(ctx *iris.Context) {
 
 Party除了設定上層路徑之外，我們如果加".(dot)"，就會變成SubDomain（也算合理，畢竟Hostname也算是路徑）。
 
-所以明天就是[subdomains](http://iris-go.com/subdomains/)了
+在Subdomain碰到了一些問題，就是在Listen時，好像不是每個Listen都有辦法處理，譬如ListenTLSAuto。
+
+目前猜測有可能是ACME的問題。
