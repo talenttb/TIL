@@ -28,3 +28,5 @@ Iris version = 4.1.1
 [Static Files](/staticFiles.md)
 
 [Gzip](/litteCHs.md)
+
+[Body Binder](/bodyBinder.md)
