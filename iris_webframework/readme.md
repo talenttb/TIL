@@ -26,3 +26,5 @@ Iris version = 4.1.1
 [Middleware](/middleware.md)
 
 [Static Files](/staticFiles.md)
+
+[Gzip](/litteCHs.md)
