@@ -55,3 +55,59 @@ type Cookie struct {
 
 如果我們需要設定subDomain或是長時效等等額外設定，就必須使用這個物件了
 
+
+## Sessions
+
+記得下載
+```go
+go get -u github.com/kataras/go-sessions
+```
+
+在iris裡，Session是被包成一個物件，所以我們再使用時，需要從context取得session然後在使用以下方法操作，實做在 */sessions.go* 這個檔案裡。
+```go
+Session interface {
+	ID() string
+	Get(string) interface{}
+	GetString(key string) string
+	GetInt(key string) int
+	GetAll() map[string]interface{}
+	VisitAll(cb func(k string, v interface{}))
+	Set(string, interface{})
+	Delete(string)
+	Clear()
+}
+```
+
+其實再下一層是**sessionsManager**，這裡面有一個provider，所以我們可以使用本機或是iris提供的redis來存放sessions。
+
+##### *Redis的設定參考範例使用UseSessionDB即可
+
+我們在*ctx.Session().Set()* 後，前端的Cookie Key 是**irissessionid**
+
+更改方式一樣從最外層iris.config下設定sessions相關屬性
+
+```go
+const (
+	// DefaultCookieName the secret cookie's name for sessions
+	DefaultCookieName = "irissessionid"
+	// DefaultSessionGcDuration  is the default Session Manager's GCDuration , which is 2 hours
+	DefaultSessionGcDuration = time.Duration(2) * time.Hour
+	// DefaultCookieLength is the default Session Manager's CookieLength, which is 32
+	DefaultCookieLength = 32
+)
+
+// DefaultSessionsConfiguration the default configs for Sessions
+func DefaultSessionsConfiguration() SessionsConfiguration {
+	return SessionsConfiguration{
+		Cookie:                      DefaultCookieName,
+		CookieLength:                DefaultCookieLength,
+		DecodeCookie:                false,
+		Expires:                     0,
+		GcDuration:                  DefaultSessionGcDuration,
+		DisableSubdomainPersistence: false,
+		DisableAutoGC:               true,
+	}
+}
+```
+
+另外一樣搭配*iris.Party*就可以設定subdomain。
