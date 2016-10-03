@@ -31,4 +31,4 @@ Iris version = 4.1.1
 
 [Body Binder](/bodyBinder.md)
 
-[Cookies & Sessions](/storage.md)
+[Cookies & Sessions & Flash Messages](/storage.md)

@@ -1,4 +1,4 @@
-# Cookies & Sessions
+# Cookies & Sessions & Flash Messages
 
 ## Cookies
 
@@ -111,3 +111,13 @@ func DefaultSessionsConfiguration() SessionsConfiguration {
 ```
 
 另外一樣搭配*iris.Party*就可以設定subdomain。
+
+## Flash Messages
+
+簡單的說，這個就是特殊的Session且一次性資料的傳送（來回），因為這個的生命週期只有一個Response/Request。
+
+這邊的作法是SetFlash時將資料寫到Response的Header裡，名稱為 **_iris_flash_message_**
+
+然後在下一次發送Request時，就可以讀取的到。
+
+而且他會依照你的Session來判斷，所以可以跨頁面來傳遞資料。
